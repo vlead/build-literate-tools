@@ -142,6 +142,12 @@
 (defvar prj '())
 
 ;;; exports  org files html and leaves them in  docs
+#+END_SRC
+
+- Setting the =sitemap-title= from default to " ", so that 
+  when the sitemap is included in the html files it will not 
+  be included in the title.
+#+BEGIN_SRC  elisp :tangle publish.el :eval no :noweb yes
 (setq org-docs
 	  `("org-docs"
 		:base-directory ,*src-dir*
@@ -154,7 +160,9 @@
 		:auto-sitemap t
 		:sitemap-title " "
 		))
+#+END_SRC
 
+#+BEGIN_SRC  elisp :tangle publish.el :eval no :noweb yes
 ;;; copies non org (static) files  to docs
 (setq org-static
 	  `("org-static"

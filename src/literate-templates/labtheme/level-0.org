@@ -13,7 +13,15 @@
 #+DESCRIPTION: 
 #+KEYWORDS: 
 #+LANGUAGE:  en
+#+END_SRC
+
+- Not including the =toc= (table of contents) in the html files
+  which are exported
+#+BEGIN_SRC  org :tangle level-0.org :eval no :noweb yes
 #+OPTIONS:   H:3 num:nil toc:nil \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
+#+END_SRC
+
+#+BEGIN_SRC  org :tangle level-0.org :eval no :noweb yes
 #+EXPORT_SELECT_TAGS: export
 #+EXPORT_EXCLUDE_TAGS: noexport
 #+STARTUP: hidestars
