@@ -1,0 +1,22 @@
+#+TITLE: org-id-extra-files-init
+#+AUTHOR: VLEAD
+#+DATE: [2017-09-09 Sat]
+#+SETUPFILE: ../org-templates/level-1.org
+#+TAGS: boilerplate(b)
+#+EXCLUDE_TAGS: boilerplate
+#+OPTIONS: ^:nil
+#+INCLUDE: ../sitemap.org :only-contents t
+
+#+BEGIN_SRC  elisp :tangle org-id-extra-files-init.el :eval no :noweb yes
+;;; set up the org-id-extra-files to include all org files in the
+;;; git project. 
+;;; Author:  Venkatesh Choppella <choppell@gmail.com>
+
+;;; Evaluate this buffer using M-x eval-buffer or C-c C-b
+
+(require 'find-lisp)
+(defvar top-dir (locate-dominating-file default-directory ".git"))
+(setq org-id-track-globally t)
+(setq org-id-extra-files (find-lisp-find-files top-dir "\\.org$"))
+
+#+END_SRC
