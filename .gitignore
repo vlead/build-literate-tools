@@ -1,6 +1,3 @@
-makefile
-init.sh
-tangle-make
 build/
 elisp/
 org-templates/
