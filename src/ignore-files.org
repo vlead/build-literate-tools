@@ -1,0 +1,21 @@
+#+TITLE: Ignore Files
+#+AUTHOR: VLEAD
+#+DATE: [2017-12-26 Tue]
+#+SETUPFILE: ./org-templates/level-0.org
+#+TAGS: boilerplate(b)
+#+EXCLUDE_TAGS: boilerplate
+#+OPTIONS: ^:nil
+
+
+* Introduction
+  Lists the files that need to be ignored by git.
+
+* Files to Be Ignored
+#+BEGIN_SRC sh :tangle .gitignore
+*~
+.\#*
+*.sw[p|o]
+\#*\#
+.\#*\#
+
+#+END_SRC

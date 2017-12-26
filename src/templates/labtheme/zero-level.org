@@ -1,12 +1,17 @@
 #+TITLE: Level-0
 #+AUTHOR: VLEAD
-#+DATE: [2017-09-09 Sat]
+#+DATE: [2017-12-26 Tue]
 #+SETUPFILE: ../../org-templates/level-2.org
 #+TAGS: boilerplate(b)
 #+EXCLUDE_TAGS: boilerplate
 #+OPTIONS: ^:nil
-#+INCLUDE: ../../sitemap.org :only-contents t
 
+
+* Introduction
+  Level 0 template is defined here.
+
+* Level 0
+  The code is tangles out to level-0.org file. 
 #+BEGIN_SRC  org :tangle level-0.org :eval no :noweb yes
 #+AUTHOR:    VLEAD
 #+EMAIL:     engg@virtual-labs.ac.in
