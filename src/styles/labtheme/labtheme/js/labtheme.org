@@ -5,7 +5,6 @@
 #+TAGS: boilerplate(b)
 #+EXCLUDE_TAGS: boilerplate
 #+OPTIONS: ^:nil
-#+INCLUDE: ../../../../sitemap.org :only-contents t
 
 * JS
 ** Initialize
@@ -87,7 +86,24 @@ $(document).ready(function() {
   which are relative to root location.
 - Storing the contents of the main in the =contents= which will later be used
   for generating the bottom nav-bar.
-#+BEGIN_SRC  js :tangle labtheme.js :eval no :noweb yes
+#+BEGIN_SRC js :tangle labtheme.js :eval no :noweb yes
+  htmlObj = '';
+  function readTextFile(file) {
+    var rawFile = new XMLHttpRequest();
+    rawFile.open("GET", file, false);
+    rawFile.onreadystatechange = function () {
+        if(rawFile.readyState === 4) {
+            if(rawFile.status === 200 || rawFile.status == 0) {
+                htmlObj = rawFile.responseText;
+            }
+        }
+    };
+    rawFile.send(null);
+    return htmlObj;
+  }
+
+  domObj = $(readTextFile('../../../sitemap.html'));
+  $('body').prepend(domObj.find('ul.org-ul')[0].outerHTML);
   main = $('ul.org-ul')[0];
   $(main).find('a').each(function() {
     this.attributes['href'].value = '/' + this.attributes['href'].value;
