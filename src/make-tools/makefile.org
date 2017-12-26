@@ -1,11 +1,10 @@
 #+TITLE: Make File
 #+AUTHOR: VLEAD
 #+DATE: [2017-09-09 Sat]
-#+SETUPFILE: ./org-templates/level-0.org
+#+SETUPFILE: ../org-templates/level-1.org
 #+TAGS: boilerplate(b)
 #+EXCLUDE_TAGS: boilerplate
 #+OPTIONS: ^:nil
-#+INCLUDE: ./sitemap.org :only-contents t
 
 #+BEGIN_SRC  make :tangle makefile :eval no :noweb yes
 #SHELL := /bin/bash
