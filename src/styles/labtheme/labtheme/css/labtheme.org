@@ -1,11 +1,16 @@
 #+TITLE: Lab Theme CSS
 #+AUTHOR: VLEAD
-#+DATE: [2017-09-09 Sat]
+#+DATE: [2017-12-26 Tue]
 #+SETUPFILE: ../../../../org-templates/level-4.org
 #+TAGS: boilerplate(b)
 #+EXCLUDE_TAGS: boilerplate
 #+OPTIONS: ^:nil
-#+INCLUDE: ../../../../sitemap.org :only-contents t
+
+* Introduction
+  Lab theme css is defined here.
+
+* Labtheme  
+  The code is tangles out to labtheme.css file. 
 
 #+BEGIN_SRC  make :tangle labtheme.css :eval no :noweb yes
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,700);
