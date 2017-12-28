@@ -1,3 +1,4 @@
+#+BEGIN_SRC css :tangle worg-style.css :eval no :noweb yes
 body {
     /* background-image: url("http://orgmode.org/worg-unicorn.png"); */
     background-position: 25px 5px;
@@ -696,3 +697,6 @@ pre.a:hover {
     max-width: 50%;
     overflow: auto;
 }
+
+
+#+END_SRC

@@ -1,3 +1,19 @@
+#+TITLE: Labtheme js
+#+AUTHOR: VLEAD
+#+DATE: [2017-12-26 Tue]
+#+SETUPFILE: ./org-templates/level-0.org
+#+TAGS: boilerplate(b)
+#+EXCLUDE_TAGS: boilerplate
+#+OPTIONS: ^:nil
+
+* Introduction
+  org-info default is defined here.
+
+* org-info
+  The code is tangles out to org-info.org file.
+
+
+#+BEGIN_SRC js :tangle org-info.js :eval no :noweb yes 
 function OrgNode(e,h,f,g,d,b,j){var i=this;i.D=e;i.I=b;i.J=-1;i.H=h;i.L=f;i.HH=false;
 i.P=d;i.DRT=false;i.ST=OrgNode.SF;i.TOC=j;i.DEPTH=g;i.F=null;i.CH=new Array();i.NAV="";
 i.BS=null;if(null!=i.P){i.P.addChild(this);i.hide();}var a=document.getElementById("text-"+i.I);
@@ -286,3 +302,5 @@ if(!b){b=window.event;}if(b.which){d=b.which;}else{if(b.keyCode){d=b.keyCode;}}i
 }var a=String.fromCharCode(d);if(b.shiftKey){org_html_manager.CI.value=org_html_manager.CI.value+a;
 }else{org_html_manager.CI.value=org_html_manager.CI.value+a.toLowerCase();}org_html_manager.getKey();
 }function OrgHtmlManagerLoadCheck(){org_html_manager.init();}
+
+#+END_SRC
