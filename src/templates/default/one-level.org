@@ -8,6 +8,7 @@
 * Level 1
   The code is tangles out to level-1.org file. 
 
+#+BEGIN_SRC make :tangle one-level.css :eval no :noweb yes
 #+DESCRIPTION: 
 #+KEYWORDS: 
 #+LANGUAGE:  en
@@ -24,3 +25,9 @@
 #+HTML_HEAD:  <link rel="stylesheet" type="text/css" href="../style/css/worg-style.css" />
 #+HTML_HEAD_EXTRA:  <link rel="stylesheet" type="text/css" href="../style/css/override.css" />
 #+HTML_HEAD_EXTRA:  <link rel="icon" type="image/png" href="../style/img/favicon/popl.png" />
+
+
+#+END_SRC
+
+
+
