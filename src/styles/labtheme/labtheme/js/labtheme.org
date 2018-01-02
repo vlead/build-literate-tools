@@ -21,10 +21,12 @@ $(document).ready(function() {
 - This function will take the current location as input and will 
   return the html content as a string which can then be appended 
   to the document.
+- Getting the git url from =GIT_ORIGIN= file.
 #+BEGIN_SRC  js :tangle labtheme.js :eval no :noweb yes
-  function breadCrumbs(url){
+    function breadCrumbs(url){
     var ls = url.split("//")[1].split("/");
-    var gitSource = "https://github.com/vlead/vlabs-dev-pages/tree/master/src";
+    gitURL = readTextFile('../../../GIT_ORIGIN').slice(0,-5);
+    var gitSource = gitURL+"/tree/master/src";
     ls[0] = "Home";
     var result = "<ul class='breadcrumb'>";
     if(ls.length == 2){
@@ -72,6 +74,28 @@ $(document).ready(function() {
   }
 #+END_SRC
 
+- =readTextFile= function will take the file name as input
+  and returns the contents of the file.
+#+BEGIN_SRC  js :tangle labtheme.js :eval no :noweb yes
+  htmlObj = '';
+  function readTextFile(file) {
+    var rawFile = new XMLHttpRequest();
+    rawFile.open("GET", file, false);
+    rawFile.onreadystatechange = function () {
+        if(rawFile.readyState === 4) {
+            if(rawFile.status === 200 || rawFile.status == 0) {
+                htmlObj = rawFile.responseText;
+            }
+        }
+    }
+    rawFile.send(null);
+    return htmlObj;
+  }
+
+  domObj = $(readTextFile('../../../sitemap.html'));
+#+END_SRC
+
+
 - Appending the =Edit on Github= bar to the document by passing the =url= to the =breadCrumbs=.
 - And toggling the dropdown's on hover
 #+BEGIN_SRC  js :tangle labtheme.js :eval no :noweb yes
@@ -80,14 +104,15 @@ $(document).ready(function() {
   $('.dropdown').hover(function(){$('this .dropdown-toggle').dropdown('toggle') });
 #+END_SRC
 ** Top Navbar
-- Since we are including the sitemap in our file, and so when exported
-  to html we will have the contents in a =ul= with class =.org-ul=.
+- Getting the contents of the directory structure from the =sitemap.html= and
+  inserting in the beginning.
 - =main= will be having the contents of the sitemap in which we are intrested.
 - Converting the links which are relavtive to the current location to links
   which are relative to root location.
 - Storing the contents of the main in the =contents= which will later be used
   for generating the bottom nav-bar.
 #+BEGIN_SRC  js :tangle labtheme.js :eval no :noweb yes
+  $('body').prepend(domObj.find('ul.org-ul')[0].outerHTML);
   main = $('ul.org-ul')[0];
   $(main).find('a').each(function() {
     this.attributes['href'].value = '/' + this.attributes['href'].value;
