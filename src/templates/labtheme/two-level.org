@@ -13,7 +13,7 @@
 * Level 2
   The code is tangles out to level-2.org file.
 
-#+BEGIN_SRC  org :tangle level-2.org :eval no :noweb yes
+#+BEGIN_SRC  org :tangle two-level.org :eval no :noweb yes
 #+AUTHOR:    VLEAD
 #+EMAIL:     engg@virtual-labs.ac.in
 #+DESCRIPTION: 
