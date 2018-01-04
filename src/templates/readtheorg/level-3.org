@@ -8,7 +8,7 @@
 * Level 3
   The code is tangles out to level-3.org file.
 
-#+BEGIN_SRC make :tangle three-level.css :eval no :noweb yes
+#+BEGIN_SRC make :tangle level-3.org :eval no :noweb yes
 #+DESCRIPTION: 
 #+KEYWORDS: 
 #+LANGUAGE:  en

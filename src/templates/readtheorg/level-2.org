@@ -8,7 +8,7 @@
 * Level 2
   The code is tangles out to level-2.org file.
 
-#+BEGIN_SRC make :tangle two-level.css :eval no :noweb yes
+#+BEGIN_SRC make :tangle level-2.org :eval no :noweb yes
 
 #+DESCRIPTION: 
 #+KEYWORDS: 

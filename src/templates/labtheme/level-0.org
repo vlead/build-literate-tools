@@ -12,7 +12,7 @@
 
 * Level 0
   The code is tangles out to level-0.org file. 
-#+BEGIN_SRC  org :tangle zero-level.org :eval no :noweb yes
+#+BEGIN_SRC  org :tangle level-0.org :eval no :noweb yes
 #+AUTHOR:    VLEAD
 #+EMAIL:     engg@virtual-labs.ac.in
 #+DESCRIPTION: 
@@ -22,11 +22,11 @@
 
 - Not including the =toc= (table of contents) in the html files
   which are exported
-#+BEGIN_SRC  org :tangle zero-level.org :eval no :noweb yes
+#+BEGIN_SRC  org :tangle level-0.org :eval no :noweb yes
 #+OPTIONS:   H:3 num:nil toc:nil \n:nil @:t ::t |:t ^:t -:t f:t *:t <:t
 #+END_SRC
 
-#+BEGIN_SRC  org :tangle zero-level.org :eval no :noweb yes
+#+BEGIN_SRC  org :tangle level-0.org :eval no :noweb yes
 #+EXPORT_SELECT_TAGS: export
 #+EXPORT_EXCLUDE_TAGS: noexport
 #+STARTUP: hidestars
