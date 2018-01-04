@@ -1,18 +1,3 @@
-#+TITLE: Labtheme css
-#+AUTHOR: VLEAD
-#+DATE: [2017-12-26 Tue]
-#+SETUPFILE: ./org-templates/level-0.org
-#+TAGS: boilerplate(b)
-#+EXCLUDE_TAGS: boilerplate
-#+OPTIONS: ^:nil
-
-* Introduction
-  override default is defined here.
-
-* override 
-  The code is tangles out to override.org file. 
-
-#+BEGIN_SRC css :tangle override.css :eval no :noweb yes
 body {
  margin-left : 15%;
  margin-right: 10%;
@@ -56,6 +41,3 @@ a {
     line-height: 100%;
     padding-top: 1em;
 }
-
-
-#+END_SRC

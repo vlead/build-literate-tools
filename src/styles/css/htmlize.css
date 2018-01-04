@@ -1,4 +1,3 @@
-#+BEGIN_SRC css :tangle htmlize.css :eval no :noweb yes
 .org-bold { /* bold */ font-weight: bold; }
 .org-bold-italic { /* bold-italic */ font-weight: bold; font-style: italic; }
 .org-buffer-menu-buffer { /* buffer-menu-buffer */ font-weight: bold; }
@@ -144,6 +143,3 @@
 .org-widget-field { /* widget-field */ background-color: #d9d9d9; }
 .org-widget-inactive { /* widget-inactive */ color: #7f7f7f; }
 .org-widget-single-line-field { /* widget-single-line-field */ background-color: #d9d9d9; }
-
-
-#+END_SRC
