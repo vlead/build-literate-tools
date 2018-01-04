@@ -1,5 +1,6 @@
 #SHELL := /bin/bash
 CODE_DIR=build/code
+DOC_DIR=build/docs
 PWD=$(shell pwd)
 EXIT_FILE=${PWD}/exit.txt
 STATUS=0
@@ -12,7 +13,12 @@ init:
 build: init
 	make -f tangle-make -k all
 
-restructure: build
+restructure:  build
+	echo ${DOC_DIR}
+	mv ${DOC_DIR}/styles/css/*.css ${CODE_DIR}/styles/css/
+	mv ${DOC_DIR}/styles/js/*.js ${CODE_DIR}/styles/js/
+	mv ${DOC_DIR}/styles/img ${CODE_DIR}/styles/img
+	mv ${DOC_DIR}/styles/lib ${CODE_DIR}/styles/lib
 	mv ${CODE_DIR}/styles ${CODE_DIR}/style
 	mv ${CODE_DIR}/templates ${CODE_DIR}/org-templates
 	mv ${CODE_DIR}/make-tools/* ${CODE_DIR}/
