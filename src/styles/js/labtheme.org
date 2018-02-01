@@ -1,0 +1,292 @@
+#+TITLE: Lab-Theme Js
+#+AUTHOR: VLEAD
+#+DATE: [2017-12-26 Tue]
+#+SETUPFILE: ../../../../org-templates/level-4.org
+#+TAGS: boilerplate(b)
+#+EXCLUDE_TAGS: boilerplate
+#+OPTIONS: ^:nil
+
+* JS
+** Initialize
+- This javascript file is runs onces the document loads completly.
+- And stores the current location.
+#+BEGIN_SRC  js :tangle labtheme.js :eval no :noweb yes
+$(document).ready(function() {
+  var url = window.location.toString();
+#+END_SRC
+
+** BreadCrumbs
+- This is the function which will handle the =Edit on GitHub= bar.
+- This function will take the current location as input and will 
+  return the html content as a string which can then be appended 
+  to the document.
+#+BEGIN_SRC  js :tangle labtheme.js :eval no :noweb yes
+  function breadCrumbs(url){
+    var ls = url.split("//")[1].split("/");
+    var gitSource = "https://github.com/vlead/vlabs-dev-pages/tree/master/src";
+    ls[0] = "Home";
+    var result = "<ul class='breadcrumb'>";
+    if(ls.length == 2){
+      result = result.concat("<li><a href='/'>Home</a></li>");
+      result = result.concat("<li class='gitLink'><a href='"+gitSource+"/index.org'>Edit on Github</a></li>")
+      return result.concat("</ul>");
+    }
+    if(ls[ls.length-1] == ""){
+      ls = ls.slice(0,ls.length-1);
+    }
+    ls.forEach(function(i){
+      if(i == "Home"){
+        result = result.concat("<li><a href='/'>"+ i +"</a></li>");
+      }else if(i.indexOf(".html") > -1){
+        result = result.concat("<li class='active'>"+ capitalize(i.split(".")[0].replace(new RegExp("-",'g')," ")) +"</li>");
+      }else{
+        result = result.concat("<li><a href='/"+i+"/'>"+ capitalize(i.replace(new RegExp("-",'g')," ")) +"</a></li>");
+      }
+    });
+
+    var gitUrl;
+
+    if(url.indexOf(".html") == -1){
+      gitUrl =  url.replace("http://".concat(window.location.host),gitSource).concat("index.org")
+    }else{
+      gitUrl = url.replace("http://".concat(window.location.host),gitSource).replace(".html",".org");
+    }
+    
+    result = result.concat("<li class='gitLink'><a href='"+gitUrl+"'>Edit on Github</a></li>")
+    result = result.concat("</ul>");
+    return result;
+  }
+#+END_SRC 
+
+- =capitalize= is a function which takes a string as input
+  and return the string which is the =upperCase= representation
+  of the input string.
+#+BEGIN_SRC  js :tangle labtheme.js :eval no :noweb yes
+  function capitalize(s){
+    var ls = s.split(" ");
+    ls = ls.map(function(i){
+      return i[0].toUpperCase().concat(i.slice(1));
+    });
+    return ls.join(" ");
+  }
+#+END_SRC
+
+- Appending the =Edit on Github= bar to the document by passing the =url= to the =breadCrumbs=.
+- And toggling the dropdown's on hover
+#+BEGIN_SRC  js :tangle labtheme.js :eval no :noweb yes
+  $('#content').prepend(breadCrumbs(url));
+
+  $('.dropdown').hover(function(){$('this .dropdown-toggle').dropdown('toggle') });
+#+END_SRC
+** Top Navbar
+- Since we are including the sitemap in our file, and so when exported
+  to html we will have the contents in a =ul= with class =.org-ul=.
+- =main= will be having the contents of the sitemap in which we are intrested.
+- Converting the links which are relavtive to the current location to links
+  which are relative to root location.
+- Storing the contents of the main in the =contents= which will later be used
+  for generating the bottom nav-bar.
+#+BEGIN_SRC js :tangle labtheme.js :eval no :noweb yes
+  htmlObj = '';
+  function readTextFile(file) {
+    var rawFile = new XMLHttpRequest();
+    rawFile.open("GET", file, false);
+    rawFile.onreadystatechange = function () {
+        if(rawFile.readyState === 4) {
+            if(rawFile.status === 200 || rawFile.status == 0) {
+                htmlObj = rawFile.responseText;
+            }
+        }
+    };
+    rawFile.send(null);
+    return htmlObj;
+  }
+
+  domObj = $(readTextFile('../../../sitemap.html'));
+  $('body').prepend(domObj.find('ul.org-ul')[0].outerHTML);
+  main = $('ul.org-ul')[0];
+  $(main).find('a').each(function() {
+    this.attributes['href'].value = '/' + this.attributes['href'].value;
+  });
+  contents = $(main.outerHTML)[0];
+  $('ul.org-ul').first().addClass('nav navbar-nav');
+#+END_SRC 
+
+- Adding the class =drop-menu mutil-level= for first level drop down.
+- For all the second level drop down's we are adding the class =dropdown-menu=.
+- If child is =ul= it will have name of the directory so making it hyperlink
+  and adding the required classes of the dropdown menu.
+#+BEGIN_SRC  js :tangle labtheme.js :eval no :noweb yes
+  childs = main.children;
+  for(idx=0; idx<childs.length;idx++) {
+    cld = childs[idx].children[0];
+    if(cld.tagName == 'A');
+    else if(cld.tagName == 'UL') {
+      cld.attributes.class.value = "dropdown-menu multi-level";
+      $(cld).find('li').has('ul').addClass('dropdown-submenu');
+      $(cld).find('ul').addClass('dropdown-menu');
+      text = childs[idx].innerText.split('\n')[0];
+      link = `<a href="#" class="dropdown-toggle" data-toggle="dropdown">`+capitalize(text)+`<b class="caret"></b></a>`
+      childs[idx].innerHTML = link + cld.outerHTML;
+    };
+  };
+#+END_SRC 
+
+- Finding all the =li= which have =ul= whose first child is not a hyperlink,
+  extracting the text which is not enclosed in any tag and adding a hyperlink
+  for it.
+- Iterating in the reverse order since we are replacing the innerHTML, we should
+  come from bottom of the tree, so that their reference is not lost.
+#+BEGIN_SRC  js :tangle labtheme.js :eval no :noweb yes
+  lists = $(main).find('li').has('ul');
+  for(var i=lists.length-1;i>=0;i--) {
+    if(lists[i].firstChild.tagName != 'A') {
+      lists[i].innerHTML = "<a>"+capitalize(lists[i].innerHTML.split('\n')[0]) + "</a>" + lists[i].innerHTML.split('\n').slice(1).join('')
+    }
+  }
+  iHtml = main.outerHTML;
+  $('ul.org-ul').removeClass('org-ul');
+#+END_SRC 
+
+- Top header-nav bar to display the logo of the vlabs and 
+  appending the content of the =iHTML= which will be having
+  the innerHTML of the navbar.
+#+BEGIN_SRC  js :tangle labtheme.js :eval no :noweb yes
+  str = `<nav class="navbar navbar-default navbar-fixed-top header-nav">
+          <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="/"><img src="/style/labtheme/img/logo-new.png" /></a>
+            </div>
+          </div>
+        </nav>
+        <div class="navbar navbar-default navbar-fixed-top bottom-nav" role="navigation">
+          <div class="container-fluid">
+            <div class="collapse navbar-collapse">`;
+  str = str + iHtml;
+  str = str + '</div></div></nav>';
+#+END_SRC 
+
+- Prepending the =str=, to add the navigagion bar at the start
+  of the document and removing the contents of the =main=.
+#+BEGIN_SRC  js :tangle labtheme.js :eval no :noweb yes
+  $('body').prepend(str);
+  main.innerHTML = '';
+#+END_SRC 
+** Disqus
+- Handling the Disqus Threads here.
+- Replace the contents with the script provided by the =disqus= to 
+  replace the thread with yours.
+#+BEGIN_SRC  js :tangle labtheme.js :eval no :noweb yes
+
+  $('#postamble').before(`
+    <div id="content">
+      <div id="disqus_thread"></div>
+    </div>
+    <script>
+      (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://virtual-labs.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+      })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  `);
+#+END_SRC 
+
+** Bottom Navigation
+
+- Removing the classes =.org-ul= and adding the class
+  =footer-links= for the required elements.
+#+BEGIN_SRC  js :tangle labtheme.js :eval no :noweb yes
+  $(contents).find('.org-ul').removeClass('org-ul');
+  $(contents).removeClass('org-ul');
+  $(contents).children('li').find('ul').addClass("footer-links");
+  
+  str = `<footer class="navbar navbar-default">
+            <div class="container-fluid">`;
+#+END_SRC 
+
+- Iterating through the children and adding a div of class
+  =row= after every 4 children.
+#+BEGIN_SRC  js :tangle labtheme.js :eval no :noweb yes
+  cld = $(contents).children();
+  for(var i=0;i<cld.length;i++) {
+    if(i%4 == 0) {
+      str = str + '<div class="row">';
+    }
+#+END_SRC 
+
+- If the child is having mutiple level of sub-directories,
+  first getting the =headText= which is show in the bottom
+  navigation bar and iterating through all the sub-children
+  and just showing the top level structure.
+#+BEGIN_SRC  js :tangle labtheme.js :eval no :noweb yes
+    if( $(cld[i]).find('ul').length) {
+      iHTML = '';
+      headText = cld[i].firstChild.textContent.split('\n')[0];
+      subChilds = cld[i].firstChild.nextSibling.children
+      innerContent = '';
+      for(var j=0;j<subChilds.length;j++) {
+        iHTML = '';
+        if(subChilds[j].firstElementChild.tagName == "UL") {
+          iText = subChilds[j].firstChild.textContent.split('\n')[0];
+          iHTML = `<li><a href="/`+headText+`/`+iText+`">`+capitalize(iText)+`</a></li>`;
+        }
+        else {
+          iHTML = iHTML + subChilds[j].outerHTML;
+        }
+        innerContent = innerContent + iHTML;
+      }
+      col =`<div class="col-md-3">
+              <div class="footer-heading">
+                <a href="/`+headText+`">`+capitalize(headText)+`</a>
+              </div>
+              <ul class="footer-links">
+                `+innerContent+`
+              </ul>
+            </div>`;
+      
+      str = str + col;
+    }
+#+END_SRC 
+
+- If it is not having =ul= as children, then just adding
+  the child's innerHTML as the =footer-heading= with no
+  =footer-links=.
+#+BEGIN_SRC  js :tangle labtheme.js :eval no :noweb yes
+    else {
+      col =`<div class="col-md-3">
+              <div class="footer-heading">
+                `+cld[i].innerHTML+`
+              </div>
+            </div>`;
+    }
+    if(i%4 == 3) {
+      str = str + '</div>';
+    }
+  }
+  $('#postamble').before(str);
+#+END_SRC
+
+- On hover changing the style of elements having the class
+  =.c-dropdown= to =block= or =none= respectively.
+#+BEGIN_SRC  js :tangle labtheme.js :eval no :noweb yes
+  $('.c-dropdown').hover(function(){
+    if($(this).find('ul.c-dropdown-menu')[0]) {
+      $(this).find('ul.c-dropdown-menu')[0].style.display = 'block';
+    }
+  },function(){
+    if($(this).find('ul.c-dropdown-menu')[0]) {
+      $(this).find('ul.c-dropdown-menu')[0].style.display = 'none';
+    }
+  });
+})
+#+END_SRC
