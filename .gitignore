@@ -1,3 +1,8 @@
+*~
+*.sw[p|o]
+\#*\#
+.\#*\#
+*.html
 build/
 elisp/
 org-templates/
