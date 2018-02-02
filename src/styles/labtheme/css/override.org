@@ -1,0 +1,64 @@
+#+TITLE: Labtheme css
+#+AUTHOR: VLEAD
+#+DATE: [2017-12-26 Tue]
+#+SETUPFILE: ../../org-templates/level-2.org
+#+TAGS: boilerplate(b)
+#+EXCLUDE_TAGS: boilerplate
+#+OPTIONS: ^:nil
+
+* Introduction
+  Labtheme override css template is defined here.
+
+* override
+  The code is tangles out to override.org file. 
+
+#+BEGIN_SRC css :tangle override.css :eval no :noweb yes
+body {
+ margin-left : 15%;
+ margin-right: 10%;
+}
+
+dt {
+ margin-top: 1em;
+ font-weight : bold;
+ }
+
+
+h1.title {
+   display: inline;
+   margin-left: 0em;
+}
+
+h1, .title, h2, h3  {
+   display: block;
+   margin-top: 1em;
+   margin-bottom: 2em;
+   margin-left: 0em;
+   line-height: 1.2;
+}
+
+
+
+.timestamp {
+   color: #8B0000; /* darkred */
+}
+
+
+
+a {
+    color: #293e3d;
+    text-decoration: none;
+}
+
+#postamble {
+    color: #464646;
+    font-size: 0.8em;
+    line-height: 100%;
+    padding-top: 1em;
+}
+
+#+END_SRC
+
+
+
+
