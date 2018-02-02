@@ -1,7 +1,7 @@
 #+TITLE: Lab-Theme Js
 #+AUTHOR: VLEAD
 #+DATE: [2017-12-26 Tue]
-#+SETUPFILE: ../../../../org-templates/level-4.org
+#+SETUPFILE: ../../../org-templates/level-3.org
 #+TAGS: boilerplate(b)
 #+EXCLUDE_TAGS: boilerplate
 #+OPTIONS: ^:nil
