@@ -15,13 +15,13 @@ build: init
 
 restructure:  build
 	echo ${DOC_DIR}
-	mv ${DOC_DIR}/styles/css/*.css ${CODE_DIR}/styles/css/
-	mv ${DOC_DIR}/styles/js/*.js ${CODE_DIR}/styles/js/
-	mv ${DOC_DIR}/styles/img ${CODE_DIR}/styles/img
-	mv ${DOC_DIR}/styles/lib ${CODE_DIR}/styles/lib
-	mv ${CODE_DIR}/styles ${CODE_DIR}/style
-	mv ${CODE_DIR}/templates ${CODE_DIR}/org-templates
-	mv ${CODE_DIR}/make-tools/* ${CODE_DIR}/
+	rsync -a ${DOC_DIR}/styles/css/*.css ${CODE_DIR}/styles/css/
+	rsync -a ${DOC_DIR}/styles/js/*.js ${CODE_DIR}/styles/js/
+	rsync -a ${DOC_DIR}/styles/img/ ${CODE_DIR}/styles/img/
+	rsync -a ${DOC_DIR}/styles/lib/ ${CODE_DIR}/styles/lib/
+	mv  ${CODE_DIR}/styles ${CODE_DIR}/style
+	mv  ${CODE_DIR}/templates ${CODE_DIR}/org-templates
+	mv  ${CODE_DIR}/make-tools/* ${CODE_DIR}/
 	rm -rf ${CODE_DIR}/make-tools/
 
 clean:	
