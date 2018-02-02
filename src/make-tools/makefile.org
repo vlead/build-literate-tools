@@ -6,7 +6,7 @@
 #+EXCLUDE_TAGS: boilerplate
 #+OPTIONS: ^:nil
 
-#+BEGIN_SRC  makefile :tangle makefilefile :eval no :noweb yes
+#+BEGIN_SRC  makefile :tangle makefile :eval no :noweb yes
 #SHELL := /bin/bash
 BUILD_DIR=build
 
@@ -29,6 +29,7 @@ PWD=$(shell pwd)
 STATUS=0
 readtheorg=false
 export readtheorg
+
 #+END_SRC
 
 - Exposing the =labtheme= variable which can be modified
@@ -36,6 +37,7 @@ export readtheorg
 #+BEGIN_SRC  makefile :tangle makefile :eval no :noweb yes
 labtheme=false
 export labtheme
+
 #+END_SRC
 
 #+BEGIN_SRC  makefile :tangle makefile :eval no :noweb yes
@@ -67,21 +69,13 @@ mk-symlinks:  pull-literate-tools
 	mkdir -p ${SRC_DIR}/${ORG_DIR}; \
         mkdir -p ${SRC_DIR}/${STYLE_DIR};)
 	rsync -a ${LITERATE_DIR}/${STYLE_DIR}/ ${SRC_DIR}/${STYLE_DIR}/
-        ifeq ($(readtheorg),true)
+    ifeq ($(readtheorg),true)
 	rsync -a ${LITERATE_DIR}/${ORG_DIR}/${READTHEORG}/ ${SRC_DIR}/${ORG_DIR}/
-#+END_SRC
-
-- If the =labtheme= parameter is set to =true= then copying 
-  the required templates and styles required for the labtheme.
-#+BEGIN_SRC  makefile :tangle makefile :eval no :noweb yes
-        else ifeq ($(labtheme),true)        
+    else ifeq ($(labtheme),true)        
 	rsync -a ${LITERATE_DIR}/${ORG_DIR}/${LABTHEME}/ ${SRC_DIR}/${ORG_DIR}/
-#+END_SRC
-
-#+BEGIN_SRC  makefile :tangle makefile :eval no :noweb yes
-        else
+    else
 	rsync -a ${LITERATE_DIR}/${ORG_DIR}/${DEFAULT}/ ${SRC_DIR}/${ORG_DIR}/
-        endif
+    endif
 	rsync -a ${LITERATE_DIR}/${ORG_DIR}/tex-macros.org ${SRC_DIR}/${ORG_DIR}/
 
 pull-literate-tools:
@@ -119,6 +113,7 @@ clean-literate:
 
 clean:	clean-literate
 	rm -rf ${BUILD_DIR}
+
 #+END_SRC
 
 
