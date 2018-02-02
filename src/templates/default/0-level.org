@@ -1,6 +1,11 @@
 #+TITLE: Level-0
-#+AUTHOR:   VLEAD 
-#+EMAIL:     engg@virtual-labs.ac.in
+#+AUTHOR: VLEAD
+#+DATE: [2018-02-02 Fri]
+#+SETUPFILE: ../../org-templates/level-2.org
+#+TAGS: boilerplate(b)
+#+EXCLUDE_TAGS: boilerplate
+#+OPTIONS: ^:nil
+
 
 * Introduction
   Level 0 default is defined here.
@@ -32,3 +37,4 @@
 
 #+END_SRC
 
+  

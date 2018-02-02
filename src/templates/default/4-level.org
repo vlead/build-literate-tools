@@ -1,6 +1,10 @@
 #+TITLE: Level-4
-#+AUTHOR:    VLEAD
-#+EMAIL:     engg@virtual-labs.ac.in
+#+AUTHOR: VLEAD
+#+DATE: [2018-02-02 Fri]
+#+SETUPFILE: ../../org-templates/level-2.org
+#+TAGS: boilerplate(b)
+#+EXCLUDE_TAGS: boilerplate
+#+OPTIONS: ^:nil
 
 * Introduction
   Level 4 default is defined here.
@@ -20,13 +24,13 @@
 #+EXPORT_EXCLUDE_TAGS: noexport
 #+STARTUP: hidestars
 
-#+HTML_LINK_UP: ./index.html
-#+HTML_LINK_HOME: ./index.html
+#+HTML_LINK_UP: ../index.html
+#+HTML_LINK_HOME: ../../../../index.html
 
-#+INFOJS_OPT: view:info toc:t ltoc:t tdepth:1 mouse:underline buttons:0 path:./style/js/org-info.js
-#+HTML_HEAD:  <link rel="stylesheet" type="text/css" href="./style/css/worg-style.css" />
-#+HTML_HEAD_EXTRA:  <link rel="stylesheet" type="text/css" href="./style/css/override.css" />
-#+HTML_HEAD_EXTRA:  <link rel="icon" type="image/png" href="./style/img/favicon/popl.png" />
+#+INFOJS_OPT: view:info toc:t ltoc:t tdepth:1 mouse:underline buttons:0 path:../../../../style/js/org-info.js
+#+HTML_HEAD:  <link rel="stylesheet" type="text/css" href="../../../../style/css/worg-style.css" />
+#+HTML_HEAD_EXTRA:  <link rel="stylesheet" type="text/css" href="../../../../style/css/override.css" />
+#+HTML_HEAD_EXTRA:  <link rel="icon" type="image/png" href="../../../../style/img/favicon/popl.png" />
 
 
 #+END_SRC
