@@ -47,6 +47,9 @@
 	     "~/emacs/lisp/org-8.2.10/contrib/lisp")
        load-path))
 
+;;; set coding system to UTF-8
+(set-language-environment "UTF-8")
+
 (require 'org)
 (require 'ob-tangle)
 (load-file "./elisp/tangle-with-publish-dir.el")
