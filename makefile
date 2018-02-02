@@ -1,9 +1,8 @@
 #SHELL := /bin/bash
-CODE_DIR=build/code
-DOC_DIR=build/docs
 PWD=$(shell pwd)
-EXIT_FILE=${PWD}/exit.txt
-STATUS=0
+SRC_DIR=${PWD}/src
+CODE_DIR=${PWD}/build/code
+DOC_DIR=${PWD}/build/docs
 
 all:  restructure
 
@@ -23,7 +22,8 @@ restructure:  build
 	mv  ${CODE_DIR}/templates ${CODE_DIR}/org-templates
 	mv  ${CODE_DIR}/make-tools/* ${CODE_DIR}/
 	rm -rf ${CODE_DIR}/make-tools/
+	rsync -a ${SRC_DIR}/readme-for-build.org ${CODE_DIR}/README.org
+	rsync -a ${SRC_DIR}/templates/tex-macros.org ${CODE_DIR}/org-templates
 
 clean:	
 	make -f tangle-make clean
-
