@@ -1,6 +1,13 @@
 #+title: Research
 #+SETUPFILE: ../org-templates/level-1.org
 
+* research areas
+* students
+* funded projects
+* funded projects
+* service
+* bibliography
+
 
 
 

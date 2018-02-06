@@ -1,3 +1,32 @@
 #+title:  Service
 #+SETUPFILE: ../org-templates/level-1.org
 
+
+* Academic and Professional Service
+
+** Conference Programme Committees
+
+    FORMABS 2016. T4E 2016 (Publicity Chair), 2015 (PC Chair), 2014,
+    2013, 2012, 2011. ICTEE 2012, CSEE&T 2012, 2011. ICDCIT
+
+        ISEC 2011. ICEGOV 2015, 2014, 2013,
+
+    2012, 2011, 2010. WAMBSE 2012, 2011. Free S/W Free
+    Society 2005. ADCOMM 2005. PDCAT 2004.
+
+** Conference Organizing Committees
+    WWW 2011, ICPC 2013, T4E 2015, 2012.
+
+** Journal reviewer
+    Formal Methods in System Design. Springer, 2010. Journal of
+    Parallel and Distributed Computing, Elsevier, 2008. International
+    Journal of Formal Computing, Springer 2008.
+
+** PhD Theses Examination Committee
+    IIT Bombay 2009. Amrita University 2011. University of
+    Behrampur, 2015.
+
+** Expert Reviewer
+    DRDO Project on Formal Methods 2016. MHRD Digital Library Project
+    for Govt. of Kerala, Kerala, 2010.
+
