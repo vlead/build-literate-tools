@@ -19,6 +19,7 @@ LITERATE_DIR=literate-tools
 DEFAULT=default
 READTHEORG=readtheorg
 LABTHEME=labtheme
+SERCLABTHEME=serclabtheme
 ELISP_DIR=elisp
 ORG_DIR=org-templates
 STYLE_DIR=style
@@ -37,6 +38,9 @@ export readtheorg
 #+BEGIN_SRC  makefile :tangle makefile :eval no :noweb yes
 labtheme=false
 export labtheme
+
+serclabtheme=false
+export serclabtheme
 
 #+END_SRC
 
@@ -73,6 +77,8 @@ mk-symlinks:  pull-literate-tools
 	rsync -a ${LITERATE_DIR}/${ORG_DIR}/${READTHEORG}/ ${SRC_DIR}/${ORG_DIR}/
     else ifeq ($(labtheme),true)        
 	rsync -a ${LITERATE_DIR}/${ORG_DIR}/${LABTHEME}/ ${SRC_DIR}/${ORG_DIR}/
+    else ifeq ($(serclabtheme),true)        
+	rsync -a ${LITERATE_DIR}/${ORG_DIR}/${SERCLABTHEME}/ ${SRC_DIR}/${ORG_DIR}/
     else
 	rsync -a ${LITERATE_DIR}/${ORG_DIR}/${DEFAULT}/ ${SRC_DIR}/${ORG_DIR}/
     endif
