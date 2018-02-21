@@ -78,8 +78,10 @@ mk-symlinks:  pull-literate-tools
     else ifeq ($(labtheme),true)        
 	rsync -a ${LITERATE_DIR}/${ORG_DIR}/${LABTHEME}/ ${SRC_DIR}/${ORG_DIR}/
     else ifeq ($(serclabtheme),true)        
+        touch a.txt
 	rsync -a ${LITERATE_DIR}/${ORG_DIR}/${SERCLABTHEME}/ ${SRC_DIR}/${ORG_DIR}/
     else
+        touch b.txt
 	rsync -a ${LITERATE_DIR}/${ORG_DIR}/${DEFAULT}/ ${SRC_DIR}/${ORG_DIR}/
     endif
 	rsync -a ${LITERATE_DIR}/${ORG_DIR}/tex-macros.org ${SRC_DIR}/${ORG_DIR}/

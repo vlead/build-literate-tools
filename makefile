@@ -4,7 +4,7 @@ SRC_DIR=${PWD}/src
 CODE_DIR=${PWD}/build/code
 DOC_DIR=${PWD}/build/docs
 
-all:  restructure
+all: professor-pages 
 
 init: 
 	./init.sh
@@ -12,7 +12,7 @@ init:
 build: init
 	make -f tangle-make -k all
 
-restructure:  build
+professor-pages:  build
 	echo ${DOC_DIR}
 	rsync -a ${DOC_DIR}/styles/css/*.css ${CODE_DIR}/styles/css/
 	rsync -a ${DOC_DIR}/styles/js/*.js ${CODE_DIR}/styles/js/
