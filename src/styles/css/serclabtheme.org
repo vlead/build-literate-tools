@@ -7,15 +7,15 @@
 #+OPTIONS: ^:nil
 
 * Introduction
-  Lab theme css is defined here.
+  SERC Lab theme css is defined here.
 
-* Serclabtheme
+* SERC Labtheme
 #+name: html-exported
 #+BEGIN_SRC css
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,700);
 #content{
-    margin-left: 21% ;
-    margin-right: 21% ;
+    margin-left: 10% ;
+    margin-right: 10% ;
     margin-top: 160px;
 }
 .title{
@@ -232,13 +232,6 @@ a, li{
 .nav .open > a, .nav .open > a:focus, .nav .open > a:hover{
     background:green !important;
 }
-
-.navbar-header{
-    margin-right: 0;
-    margin-left: 0;
-    float: right !important;
-}
-
 
 #+END_SRC
 

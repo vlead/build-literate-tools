@@ -7,6 +7,15 @@
 #+OPTIONS: ^:nil
 
 * JS
+  Every Page contains a header, content and a footer.
+* Header
+  The header contains: 
+  1. an image pointing the landing page,
+  2. a horizontal navigation bar with a list of items that
+     drop down to show more items in each of it.
+  3. a breadcrumb menu that shows the current navigation
+     state.
+
 ** Initialize
 - This javascript file is runs onces the document loads completly.
 - And stores the current location.
@@ -79,37 +88,51 @@ $(document).ready(function() {
   $('.dropdown').hover(function(){$('this .dropdown-toggle').dropdown('toggle') });
 #+END_SRC
 ** Top Navbar
-- Since we are including the sitemap in our file, and so when exported
-  to html we will have the contents in a =ul= with class =.org-ul=.
-- =main= will be having the contents of the sitemap in which we are intrested.
-- Converting the links which are relavtive to the current location to links
-  which are relative to root location.
-- Storing the contents of the main in the =contents= which will later be used
-  for generating the bottom nav-bar.
-#+BEGIN_SRC js :tangle serclabtheme.js :eval no :noweb yes
-  htmlObj = '';
-  function readTextFile(file) {
-    var rawFile = new XMLHttpRequest();
-    rawFile.open("GET", file, false);
-    rawFile.onreadystatechange = function () {
-        if(rawFile.readyState === 4) {
-            if(rawFile.status === 200 || rawFile.status == 0) {
-                htmlObj = rawFile.responseText;
-            }
-        }
-    };
-    rawFile.send(null);
-    return htmlObj;
-  }
+   When the sources in org mode are exported to html,
+   =sitemap.html= is generated that lists all the resources
+   with their hyperlinks.  This file is used to create the
+   navigation bar. 
 
-  domObj = $(readTextFile('../../../sitemap.html'));
-  $('body').prepend(domObj.find('ul.org-ul')[0].outerHTML);
+*** Parse the content of =sitemap.html=
+    The file =sitemap.html= is at the level of home.
+    Therefor the url for =sitemap.html= is the root url
+    concatenated with =/sitemap.html=.  A get request is
+    made to fetch this resource, and the fetched content is
+    parsed to construct the menu list. 
+
+#+BEGIN_SRC js :tangle serclabtheme.js :eval no :noweb yes
+  var readContentFromSiteMap = function() {
+    var request = new XMLHttpRequest();
+    var sitemapurl = url.split("//")[0] + "//" + url.split("//")[1].split("/")[0] + "/sitemap.html";
+    request.open("GET", sitemapurl, false);
+    request.send(null);
+
+    var doc = document.implementation.createHTMLDocument("sitemap");
+    doc.documentElement.innerHTML = request.responseText;
+
+    return doc.documentElement.getElementsByTagName("div")[0];
+  };
+
+  var parseContent = function(cnt) {
+    var lis = cnt.getElementsByTagName("li");
+    var flis = Array.from(lis).filter(function(el) { return el.getElementsByTagName("ul").length > 0; });
+    var fflis = flis.filter(function(el) { return el.textContent.indexOf("org") == -1;});
+    var ulList = document.createElement("ul");
+    ulList.className = "org-ul";
+    fflis.forEach(function(el) { ulList.append(el); });
+    return ulList;
+  };
+
+  var cnt = readContentFromSiteMap();
+  var ulList = parseContent(cnt);
+  document.body.prepend(ulList);
   main = $('ul.org-ul')[0];
   $(main).find('a').each(function() {
     this.attributes['href'].value = '/' + this.attributes['href'].value;
   });
   contents = $(main.outerHTML)[0];
   $('ul.org-ul').first().addClass('nav navbar-nav');
+
 #+END_SRC 
 
 - Adding the class =drop-menu mutil-level= for first level drop down.
@@ -132,11 +155,12 @@ $(document).ready(function() {
   };
 #+END_SRC 
 
-- Finding all the =li= which have =ul= whose first child is not a hyperlink,
-  extracting the text which is not enclosed in any tag and adding a hyperlink
-  for it.
-- Iterating in the reverse order since we are replacing the innerHTML, we should
-  come from bottom of the tree, so that their reference is not lost.
+- Finding all the =li= which have =ul= whose first child is
+  not a hyperlink, extracting the text which is not enclosed
+  in any tag and adding a hyperlink for it.
+- Iterating in the reverse order since we are replacing the
+  innerHTML, we should come from bottom of the tree, so that
+  their reference is not lost.
 #+BEGIN_SRC  js :tangle serclabtheme.js :eval no :noweb yes
   lists = $(main).find('li').has('ul');
   for(var i=lists.length-1;i>=0;i--) {
@@ -153,7 +177,7 @@ $(document).ready(function() {
   the innerHTML of the navbar.
 #+BEGIN_SRC  js :tangle serclabtheme.js :eval no :noweb yes
   str = `<nav class="container navbar navbar-default navbar-fixed-top header-nav">
-          <div class="container">
+          <div class="container-fluid">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
               <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -162,14 +186,13 @@ $(document).ready(function() {
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
-              <a class="navbar-brand" href="/"><img src="/style/serclabtheme/img/iiit-hyderabad.jpg" /></a>
+              <a class="navbar-brand" href="/"><img src="/style/img/iiit-hyderabad.jpg" /></a>
             </div>
           </div>
         </nav>
-        <div class=" container navbar navbar-default navbar-fixed-top bottom-nav" role="navigation">
-          <div class="container">
+        <div class="container navbar navbar-default navbar-fixed-top bottom-nav" role="navigation">
+          <div class="container-fluid">
             <div class="collapse navbar-collapse">`;
-            
   str = str + iHtml;
   str = str + '</div></div></nav>';
 #+END_SRC 
@@ -212,7 +235,7 @@ $(document).ready(function() {
   $(contents).children('li').find('ul').addClass("footer-links");
   
   str = `<footer class="navbar navbar-default">
-            <div class="container">`;
+            <div class="container-fluid">`;
 #+END_SRC 
 
 - Iterating through the children and adding a div of class
