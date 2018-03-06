@@ -50,7 +50,7 @@ $(document).ready(function() {
         result = result.concat("<li class='active'>"+ capitalize(i.split(".")[0].replace(new RegExp("-",'g')," ")) +"</li>");
       }else{
         result = result.concat("<li><a href='/"+i+"/'>"+ capitalize(i.replace(new RegExp("-",'g')," ")) +"</a></li>");
-      }
+     }
     });
 
     var gitUrl;
@@ -186,6 +186,7 @@ $(document).ready(function() {
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
               </button>
+              <h1>Software Engineering Research Center</h1>
               <a class="navbar-brand" href="/"><img src="/style/img/iiit-hyderabad.jpg" /></a>
             </div>
           </div>

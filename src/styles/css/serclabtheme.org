@@ -46,7 +46,7 @@ body{
 /* Top Navigation bar */
 
 .header-nav{
-    min-height: 75px;
+    min-height: 113px;
     background: #fff;
     color: #404040;
 }
@@ -61,7 +61,7 @@ body{
 
 .bottom-nav{
     border-top: solid 5px #202020;
-    margin-top:75px;
+    margin-top:108px;
     background:#404040;
     max-height: 56px;
 }
@@ -231,6 +231,12 @@ a, li{
 
 .nav .open > a, .nav .open > a:focus, .nav .open > a:hover{
     background:green !important;
+}
+
+/*new serc labtheme css*/
+.navbar-brand{
+margin-left: 80% !important;
+margin-top: -12% !important;
 }
 
 #+END_SRC
